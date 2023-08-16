@@ -1,20 +1,22 @@
-import PropTypes from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
+import { getFilter } from 'redux/selectors';
+import { changeFilter } from 'redux/filterSlice';
 
-const Filter = ({ filter, onChange }) => {
+const Filter = () => {
+  const dispatch = useDispatch();
+  const filter = useSelector(getFilter);
+
   return (
     <input
       type="text"
       name="filter"
       value={filter}
-      onChange={onChange}
+      onChange={event => {
+        dispatch(changeFilter(event.target.value));
+      }}
       placeholder="Enter name four search"
     />
   );
-};
-
-Filter.propTypes = {
-  filter: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
 };
 
 export default Filter;
