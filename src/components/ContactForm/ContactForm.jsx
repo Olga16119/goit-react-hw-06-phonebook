@@ -1,12 +1,14 @@
 import { nanoid } from 'nanoid';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
 import { addcontact } from 'redux/contactsSlice';
+import { getContacts } from 'redux/selectors'; 
 
 const ContactForm = ({ onSubmit }) => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
   const dispatch = useDispatch();
+  const contacts= useSelector(getContacts)
 
   const onChangeForm = ({ target }) => {
     const { name, value } = target;
@@ -31,6 +33,10 @@ const ContactForm = ({ onSubmit }) => {
       name: name,
       number: number,
     };
+    if (contacts.find(contact => contact.name.toLowerCase() === newContact.name.toLocaleLowerCase())||contacts.find(contact=>contact.number===newContact.number)) {
+    resetForm();
+      return alert(` ${newContact.name} already is in phonebook`)
+    }
     dispatch(addcontact(newContact));
     resetForm();
   };

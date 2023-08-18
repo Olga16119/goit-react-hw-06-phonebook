@@ -6,14 +6,16 @@ const Filter = () => {
   const dispatch = useDispatch();
   const filter = useSelector(getFilter);
 
+  const filterChange = event => {
+    dispatch(changeFilter(event.currentTarget.value))
+}
+
   return (
     <input
       type="text"
       name="filter"
       value={filter}
-      onChange={event => {
-        dispatch(changeFilter(event.target.value));
-      }}
+      onChange={filterChange}
       placeholder="Enter name four search"
     />
   );
