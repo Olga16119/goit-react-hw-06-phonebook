@@ -7,8 +7,8 @@ const Filter = () => {
   const filter = useSelector(getFilter);
 
   const filterChange = event => {
-    dispatch(changeFilter(event.currentTarget.value))
-}
+    dispatch(changeFilter(event.currentTarget.value));
+  };
 
   return (
     <input
